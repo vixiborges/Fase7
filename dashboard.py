@@ -192,29 +192,29 @@ with tabs[1]:
         st.subheader("➕ Novo Plantio")
         talhoes = listar_talhoes()
         talhao_opts = {t["nome"]: t["id"] for t in talhoes}
-        talhao_nome = st.selectbox("Talhão", list(talhao_opts.keys()))
+        talhao_nome = st.selectbox("Talhão", list(talhao_opts.keys()), key="f1_talhao")
         talhao_id = talhao_opts[talhao_nome]
 
-        cultura = st.selectbox("Cultura", ["soja", "milho"])
-        formato = st.radio("Formato da área", ["retangular", "circular"], horizontal=True)
+        cultura = st.selectbox("Cultura", ["soja", "milho"], key="f1_cultura")
+        formato = st.radio("Formato da área", ["retangular", "circular"], horizontal=True, key="f1_formato")
 
         if formato == "retangular":
-            comp = st.number_input("Comprimento (m)", min_value=1.0, value=100.0)
-            larg = st.number_input("Largura (m)", min_value=1.0, value=40.0)
+            comp = st.number_input("Comprimento (m)", min_value=1.0, value=100.0, key="f1_comp")
+            larg = st.number_input("Largura (m)", min_value=1.0, value=40.0, key="f1_larg")
             area = comp * larg
             largura_calc = larg
         else:
-            raio = st.number_input("Raio (m)", min_value=1.0, value=60.0)
+            raio = st.number_input("Raio (m)", min_value=1.0, value=60.0, key="f1_raio")
             area = math.pi * raio ** 2
             largura_calc = raio * 2
 
         st.info(f"📐 Área calculada: **{area:.2f} m²**")
 
-        espacamento = st.number_input("Espaçamento entre ruas (m)", min_value=0.1, value=0.5)
+        espacamento = st.number_input("Espaçamento entre ruas (m)", min_value=0.1, value=0.5, key="f1_esp")
         ruas = int(largura_calc // espacamento)
         st.info(f"🌿 Número de ruas: **{ruas}**")
 
-        insumo_rua = st.number_input("Insumo por rua (L)", min_value=0.1, value=4.0)
+        insumo_rua = st.number_input("Insumo por rua (L)", min_value=0.1, value=4.0, key="f1_insumo")
         insumo_total = ruas * insumo_rua
         st.success(f"🪣 Insumo total: **{insumo_total:.2f} L**")
 
@@ -243,7 +243,7 @@ with tabs[1]:
 
             st.subheader("🗑️ Remover Plantio")
             ids = [str(p["id"]) for p in plantios]
-            del_id = st.selectbox("ID do plantio", ids)
+            del_id = st.selectbox("ID do plantio", ids, key="f1_del_id")
             if st.button("Remover", type="secondary"):
                 deletar_plantio(int(del_id))
                 st.warning(f"Plantio #{del_id} removido.")
@@ -340,12 +340,14 @@ with tabs[3]:
     col1, col2 = st.columns([1, 1])
     with col1:
         cenario = st.selectbox("Cenário de simulação", ["normal", "seca", "excesso", "critico"],
+                               key="f3_cenario",
                                format_func=lambda x: {"normal": "🌿 Normal",
                                                        "seca": "🏜️ Seca",
                                                        "excesso": "🌊 Excesso de água",
                                                        "critico": "🚨 Crítico"}[x])
-        n_ciclos = st.slider("Número de ciclos a simular", 1, 50, 10)
+        n_ciclos = st.slider("Número de ciclos a simular", 1, 50, 10, key="f3_n_ciclos")
         talhao_id = st.selectbox("Talhão", [t["id"] for t in listar_talhoes()],
+                                 key="f3_talhao",
                                  format_func=lambda i: next(t["nome"] for t in listar_talhoes() if t["id"] == i))
 
         col_btn1, col_btn2 = st.columns(2)
@@ -399,7 +401,7 @@ with tabs[3]:
             for sensor, valor in r["leitura"].items():
                 dados_plot.append({"Ciclo": i + 1, "Sensor": sensor.title(), "Valor": valor})
         df_plot = pd.DataFrame(dados_plot)
-        sensor_plot = st.selectbox("Sensor para gráfico", df_plot["Sensor"].unique().tolist())
+        sensor_plot = st.selectbox("Sensor para gráfico", df_plot["Sensor"].unique().tolist(), key="f3_sensor_plot")
         fig_iot = px.line(df_plot[df_plot["Sensor"] == sensor_plot],
                           x="Ciclo", y="Valor", title=f"{sensor_plot} — {n_ciclos} ciclos",
                           color_discrete_sequence=["#1a7a1a"])
@@ -476,7 +478,7 @@ with tabs[4]:
                         float(lim.get("critico_baixo", 0)),
                         float(lim.get("critico_alto", 100)),
                         float((lim.get("ideal_min", 0) + lim.get("ideal_max", 100)) / 2),
-                        key=f"pred_{f}"
+                        key=f"f4_pred_{f}"
                     )
                 pred_df = pd.DataFrame([pred_input])
                 pred_rf = rf.predict(pred_df)[0]
@@ -502,10 +504,11 @@ with tabs[5]:
     col1, col2 = st.columns(2)
     with col1:
         st.subheader("📨 Publicar Alerta Manual")
-        tipo_alerta = st.selectbox("Tipo", ["iot", "clima", "visao", "sistema"])
-        sev_alerta = st.selectbox("Severidade", ["info", "aviso", "critico"])
+        tipo_alerta = st.selectbox("Tipo", ["iot", "clima", "visao", "sistema"], key="f5_tipo")
+        sev_alerta = st.selectbox("Severidade", ["info", "aviso", "critico"], key="f5_sev")
         msg_alerta = st.text_area("Mensagem",
-            "Sensor de umidade leu valor abaixo do limiar crítico. Verificar irrigação.")
+            "Sensor de umidade leu valor abaixo do limiar crítico. Verificar irrigação.",
+            key="f5_msg")
         if st.button("📤 Publicar no SNS", type="primary"):
             payload = publicar_mensagem(tipo_alerta, sev_alerta, msg_alerta)
             st.success(f"✅ Publicado! MessageId: `{payload['MessageId']}`")
@@ -556,10 +559,11 @@ with tabs[6]:
     with col1:
         st.subheader("⚙️ Configurações")
         pasta_custom = st.text_input("Pasta de imagens",
-                                     value=os.path.join(ROOT, "assets/sample_images"))
+                                     value=os.path.join(ROOT, "assets/sample_images"),
+                                     key="f6_pasta")
         st.info("💡 Para usar YOLOv5 real, instale: `pip install torch torchvision yolov5`")
-        gerar_img = st.checkbox("Gerar imagens de exemplo se pasta vazia", value=True)
-        enviar_alertas_visao = st.checkbox("Publicar alertas no SNS ao detectar problemas", value=True)
+        gerar_img = st.checkbox("Gerar imagens de exemplo se pasta vazia", value=True, key="f6_gerar")
+        enviar_alertas_visao = st.checkbox("Publicar alertas no SNS ao detectar problemas", value=True, key="f6_alertas")
         processar = st.button("🔍 Processar Imagens", type="primary")
 
     with col2:

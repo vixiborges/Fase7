@@ -1,0 +1,35 @@
+[
+  {
+    "MessageId": "msg-20260610210241746111",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-critico",
+    "timestamp": "2026-06-10 21:02:41",
+    "tipo": "iot",
+    "severidade": "critico",
+    "mensagem": "pH CRÍTICO BAIXO: 4.8 pH. Correção imediata de acidez necessária.",
+    "destinatarios": "Alertas críticos — requer ação imediata",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
+  },
+  {
+    "MessageId": "msg-20260610210241758142",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-aviso",
+    "timestamp": "2026-06-10 21:02:41",
+    "tipo": "visao",
+    "severidade": "aviso",
+    "mensagem": "Praga detectada com 73% de confiança na imagem lavoura_01.jpg",
+    "destinatarios": "Avisos de monitoramento",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
+  },
+  {
+    "MessageId": "msg-20260610210241780539",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-aviso",
+    "timestamp": "2026-06-10 21:02:41",
+    "tipo": "clima",
+    "severidade": "aviso",
+    "mensagem": "🌧️ CHUVA FORTE: Suspenda irrigação e aplicação de defensivos.",
+    "destinatarios": "Avisos de monitoramento",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
+  }
+]
