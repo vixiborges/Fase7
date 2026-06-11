@@ -4,8 +4,7 @@
 FIAP – Engenharia de Software | PBL – Project-Based Learning
 
 > **Aluno:** Gustavo Borges — RM: 567477  
-> **GitHub:** [seu-link-aqui]  
-> **Vídeo:** [link-youtube-não-listado]
+
 
 ---
 
