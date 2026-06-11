@@ -43,29 +43,131 @@ st.set_page_config(
 # ── CSS personalizado ─────────────────────────────────────────────────────────
 st.markdown("""
 <style>
-[data-testid="stMetricValue"] { color: #1a7a1a !important; font-size: 2rem !important; }
-[data-testid="stMetricLabel"] { color: #444 !important; }
-[data-testid="stMetricDelta"] { font-size: 0.85rem !important; }
-.stTabs [data-baseweb="tab-list"] { gap: 8px; }
-.stTabs [data-baseweb="tab"] {
-    background-color: #f0f7f0;
-    border-radius: 6px 6px 0 0;
-    padding: 8px 20px;
-    font-weight: 600;
+/* Métricas */
+[data-testid="stMetricValue"] {
+    color: #14532d !important;
+    font-size: 1.9rem !important;
+    font-weight: 700 !important;
 }
-.stTabs [aria-selected="true"] { background-color: #1a7a1a !important; color: white !important; }
+[data-testid="stMetricLabel"] {
+    color: #1f2937 !important;
+    font-size: 0.9rem !important;
+    font-weight: 600 !important;
+}
+[data-testid="stMetricDelta"] {
+    font-size: 0.85rem !important;
+    font-weight: 500 !important;
+}
+[data-testid="stMetric"] {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 14px 18px !important;
+}
+
+/* Abas */
+.stTabs [data-baseweb="tab-list"] {
+    gap: 4px;
+    background: #e5e7eb;
+    border-radius: 10px;
+    padding: 4px;
+}
+.stTabs [data-baseweb="tab"] {
+    background-color: transparent;
+    border-radius: 7px;
+    padding: 8px 16px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: #374151 !important;
+    border: none !important;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    background-color: #d1fae5 !important;
+    color: #14532d !important;
+}
+.stTabs [aria-selected="true"] {
+    background-color: #15803d !important;
+    color: #ffffff !important;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.18);
+}
+
+/* Sidebar */
+[data-testid="stSidebar"] {
+    background: #f0fdf4;
+    border-right: 1px solid #bbf7d0;
+}
+[data-testid="stSidebar"] [data-testid="stMetricValue"] {
+    color: #14532d !important;
+    font-size: 1.4rem !important;
+}
+[data-testid="stSidebar"] [data-testid="stMetricLabel"] {
+    color: #1f2937 !important;
+}
+[data-testid="stSidebar"] [data-testid="stMetric"] {
+    background: #dcfce7;
+    border: 1px solid #86efac;
+    padding: 8px 12px !important;
+}
+
+/* Cards de alerta */
 .alerta-critico {
-    background: #fee2e2; border-left: 4px solid #ef4444;
-    padding: 10px 14px; border-radius: 4px; margin: 4px 0;
+    background: #fef2f2;
+    border-left: 4px solid #dc2626;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 5px 0;
+    color: #7f1d1d !important;
+    font-size: 0.9rem;
 }
 .alerta-aviso {
-    background: #fef9c3; border-left: 4px solid #eab308;
-    padding: 10px 14px; border-radius: 4px; margin: 4px 0;
+    background: #fefce8;
+    border-left: 4px solid #ca8a04;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 5px 0;
+    color: #713f12 !important;
+    font-size: 0.9rem;
 }
 .alerta-info {
-    background: #dbeafe; border-left: 4px solid #3b82f6;
-    padding: 10px 14px; border-radius: 4px; margin: 4px 0;
+    background: #eff6ff;
+    border-left: 4px solid #2563eb;
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin: 5px 0;
+    color: #1e3a5f !important;
+    font-size: 0.9rem;
 }
+
+/* Expanders */
+[data-testid="stExpander"] {
+    border: 1px solid #d1fae5;
+    border-radius: 8px;
+}
+[data-testid="stExpander"] summary {
+    color: #14532d !important;
+    font-weight: 600;
+}
+
+/* Botões primários */
+.stButton > button[kind="primary"] {
+    background-color: #15803d !important;
+    color: #ffffff !important;
+    border: none !important;
+    font-weight: 600 !important;
+}
+.stButton > button[kind="primary"]:hover {
+    background-color: #166534 !important;
+}
+
+/* DataFrames */
+[data-testid="stDataFrame"] {
+    border: 1px solid #d1fae5;
+    border-radius: 8px;
+}
+
+/* Cabeçalhos */
+h1, h2, h3 { color: #14532d !important; }
+p, li { color: #1f2937; }
 </style>
 """, unsafe_allow_html=True)
 

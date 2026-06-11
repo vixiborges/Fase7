@@ -31,5 +31,38 @@
     "destinatarios": "Avisos de monitoramento",
     "status": "ENVIADO (simulado)",
     "canal": "e-mail + SMS"
+  },
+  {
+    "MessageId": "msg-20260610211115682347",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-aviso",
+    "timestamp": "2026-06-10 21:11:15",
+    "tipo": "iot",
+    "severidade": "aviso",
+    "mensagem": "UMIDADE acima do ideal: 77.13 %. Atenção.",
+    "destinatarios": "Avisos de monitoramento",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
+  },
+  {
+    "MessageId": "msg-20260610211115704113",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-aviso",
+    "timestamp": "2026-06-10 21:11:15",
+    "tipo": "iot",
+    "severidade": "aviso",
+    "mensagem": "PH abaixo do ideal: 5.67 pH. Monitorar.",
+    "destinatarios": "Avisos de monitoramento",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
+  },
+  {
+    "MessageId": "msg-20260610211121711622",
+    "TopicArn": "arn:aws:sns:us-east-1:000000000000:farmtech-aviso",
+    "timestamp": "2026-06-10 21:11:21",
+    "tipo": "iot",
+    "severidade": "aviso",
+    "mensagem": "PH acima do ideal: 7.09 pH. Atenção.",
+    "destinatarios": "Avisos de monitoramento",
+    "status": "ENVIADO (simulado)",
+    "canal": "e-mail + SMS"
   }
 ]
