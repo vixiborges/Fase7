@@ -149,13 +149,8 @@ st.markdown("""
 }
 
 /* Botões primários */
-.stButton > button[kind="primary"] {
-    background-color: #15803d !important;
-    color: #ffffff !important;
-    border: none !important;
-    font-weight: 600 !important;
-}
-.stButton > button[kind="primary"]:hover {
+
+.stButton > button{
     background-color: #166534 !important;
 }
 
